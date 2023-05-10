@@ -1,1 +1,1 @@
-# bcit-tracker
+# BCIT Assignment Tracker
