@@ -7,15 +7,16 @@ interface props {
   title: string
   status : number,
   removeTodo: (idx:number) => void,
+  markTodo: (idx:number) => void,
   idx: number
 }
 
 
-export function Assignment({title, status,removeTodo, idx} : props) {
+export function Assignment({title, status,removeTodo, markTodo, idx} : props) {
   return (
     <div className={styles.assignment}>
       
-      <button onClick={() => console.log("alex")} className={styles.checkContainer}>
+      <button onClick={() => markTodo(idx)} className={styles.checkContainer}>
         {status ?<BsFillCheckCircleFill/> :<div />}
       </button>
 

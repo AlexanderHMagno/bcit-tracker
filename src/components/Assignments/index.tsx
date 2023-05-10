@@ -10,11 +10,12 @@ interface todo {
 interface props {
   todos : todo[],
   removeTodo : (idx:number) => void
+  markTodo: (idx:number) => void,
 }
 
 
 
-export function Assignments({todos, removeTodo} : props) {
+export function Assignments({todos, removeTodo, markTodo} : props) {
 
   const completed = todos.filter(x => x.status).length;
 
@@ -34,7 +35,7 @@ export function Assignments({todos, removeTodo} : props) {
 
       <div className={styles.list}>
 
-        {todos.map((todo, idx) =>  <Assignment key={idx} idx={idx} title = {todo.title} status = {todo.status} removeTodo ={removeTodo}/> )}
+        {todos.map((todo, idx) =>  <Assignment key={idx} idx={idx} title = {todo.title} status = {todo.status} removeTodo ={removeTodo} markTodo={markTodo}/> )}
        
       </div>
     </section>
