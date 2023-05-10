@@ -16,10 +16,10 @@ export function Assignment({title, status,removeTodo, idx} : props) {
     <div className={styles.assignment}>
       
       <button onClick={() => console.log("alex")} className={styles.checkContainer}>
-        {status ?<BsFillCheckCircleFill className="styles.textCompleted"/> :<div />}
+        {status ?<BsFillCheckCircleFill/> :<div />}
       </button>
 
-      <p>{title}</p>
+      <p className={status? styles.textCompleted : ""}>{title}</p>
 
       <button className={styles.deleteButton}>
         <TbTrash size={20} onClick={() => removeTodo(idx)} />
