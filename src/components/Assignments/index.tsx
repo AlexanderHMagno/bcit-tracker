@@ -1,23 +1,41 @@
 import { Assignment } from "../Assignment";
 import styles from "./assignments.module.css";
 
-export function Assignments() {
+
+interface todo { 
+  title: string,
+  status: number,
+}
+
+interface props {
+  todos : todo[],
+  removeTodo : (idx:number) => void
+}
+
+
+
+export function Assignments({todos, removeTodo} : props) {
+
+  const completed = todos.filter(x => x.status).length;
+
   return (
     <section className={styles.assignments}>
       <header className={styles.header}>
         <div>
           <p>Created Assignments</p>
-          <span>1</span>
+          <span>{todos.length}</span>
         </div>
 
         <div>
           <p className={styles.textPurple}>Completed Assignments</p>
-          <span>1 of 1</span>
+          <span>{completed} of {todos.length}</span>
         </div>
       </header>
 
       <div className={styles.list}>
-        <Assignment />
+
+        {todos.map((todo, idx) =>  <Assignment key={idx} idx={idx} title = {todo.title} status = {todo.status} removeTodo ={removeTodo}/> )}
+       
       </div>
     </section>
   );
