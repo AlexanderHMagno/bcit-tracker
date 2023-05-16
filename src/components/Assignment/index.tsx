@@ -1,6 +1,7 @@
 import styles from "./assignment.module.css";
 import { TbTrash  } from "react-icons/tb";
 import { BsFillCheckCircleFill  } from "react-icons/bs";
+import { capitalize } from "../../helpers/stringHelpers";
 
 
 interface props {
@@ -20,7 +21,7 @@ export function Assignment({title, status,removeTodo, markTodo, idx} : props) {
         {status ?<BsFillCheckCircleFill/> :<div />}
       </button>
 
-      <p className={status? styles.textCompleted : ""}>{title}</p>
+      <p className={status? styles.textCompleted : ""}>{capitalize(title)}</p>
 
       <button className={styles.deleteButton}>
         <TbTrash size={20} onClick={() => removeTodo(idx)} />
