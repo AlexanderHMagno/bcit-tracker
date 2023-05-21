@@ -1,20 +1,37 @@
 import styles from "./header.module.css";
-import { AiOutlinePlusCircle } from "react-icons/ai";
+import { AiOutlinePlusCircle, AiOutlineCalendar } from "react-icons/ai";
 import { uppercase } from "../../helpers/stringHelpers";
 import { useState } from "react";
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
+
+import { format } from 'date-fns';
 
 
 interface props {
-  addTodo: (title:string) => void
+  addTodo: (title:string, dueDate?: Date) => void
 }
 
 
 export function Header({addTodo} : props) {
 
+  const [dueDate, setDueDate] = useState<Date>();
+  const [dateOpen, setDateOpen] = useState(false);
   const [title, setTitle] = useState("");
+  
+  const buttonDisabled = !title.length || !dueDate;
+  const selectDate = (e: Date | undefined) => {
+    
+    setDateOpen(false);
+    if(!e) return;
+    setDueDate(e); 
+    
+  } 
+
   const handleClick = () => {
     setTitle("");
-    addTodo(title);
+    addTodo(title,dueDate);
+    setDueDate(undefined);
     
   }
 
@@ -24,7 +41,25 @@ export function Header({addTodo} : props) {
       <h1>{uppercase("bcit")} Assignment Tracker</h1>
       <div className={styles.newAssignmentForm}>
         <input onChange={(e) => setTitle(e.target.value) } placeholder="Add a new assignment" type="text" value={title} />
-        <button disabled={!title.length} onClick={handleClick}>
+        
+        <div >
+        <span onClick={()=>setDateOpen(!dateOpen)} className={styles.dateButton}> <AiOutlineCalendar size="20"/> <p>{dueDate && format(dueDate,'PP')}</p> </span> 
+          <div >
+            {dateOpen ? 
+            <div className={styles.absolute} >
+              <DayPicker
+                mode="single"
+                selected={dueDate}
+                onSelect={selectDate}
+                fromDate={new Date()}
+              />
+              </div>
+              : ""
+            }
+          </div>
+        </div> 
+
+        <button disabled={buttonDisabled} onClick={handleClick}>
           Create <AiOutlinePlusCircle size={20} />
         </button>
       </div>

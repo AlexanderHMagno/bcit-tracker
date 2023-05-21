@@ -35,7 +35,7 @@ export function Assignments({todos, removeTodo, markTodo} : props) {
 
       <div className={styles.list}>
 
-        {todos.map((todo, idx) =>  <Assignment key={idx} idx={idx} title = {todo.title} status = {todo.status} removeTodo ={removeTodo} markTodo={markTodo}/> )}
+        {todos.map((todo, idx) =>  <Assignment key={idx} idx={idx} {...todo} removeTodo ={removeTodo} markTodo={markTodo}/> )}
        
       </div>
     </section>

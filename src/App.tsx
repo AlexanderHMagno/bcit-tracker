@@ -3,11 +3,12 @@ import { Assignments } from "./components/Assignments";
 import { todos } from "./data";
 import { useState } from "react";
 
+
 function App() {
 
   const [Todo, setTodos] = useState(todos);
   
-  const addTodo = (title:string) => setTodos([...Todo,{title,status:0}]);
+  const addTodo = (title:string, dueDate: Date ) => setTodos([...Todo,{title,status:0, dueDate}]);
 
   const removeTodo = (idx:number) => {
     const newTodos = [...Todo];
