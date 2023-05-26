@@ -3,20 +3,21 @@ import { TbTrash  } from "react-icons/tb";
 import { BsFillCheckCircleFill  } from "react-icons/bs";
 import { capitalize } from "../../helpers/stringHelpers";
 import { DueDate } from "../DueDate";
+import { useStore } from "../../appStore";
 
 
 interface props {
   title: string
   status : number,
-  dueDate: Date,
-  removeTodo: (idx:number) => void,
-  markTodo: (idx:number) => void,
+  dueDate?: Date,
   idx: number
 }
 
 
-export function Assignment({title, status, dueDate,removeTodo, markTodo, idx} : props) {
+export function Assignment({title, status, dueDate, idx} : props) {
 
+  const {removeTodo, markTodo} = useStore();
+  
   
   return (
     <div className={styles.assignment}>

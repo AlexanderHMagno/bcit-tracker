@@ -1,22 +1,11 @@
+import { useStore } from "../../appStore";
 import { Assignment } from "../Assignment";
 import styles from "./assignments.module.css";
 
 
-interface todo { 
-  title: string,
-  status: number,
-}
+export function Assignments() {
 
-interface props {
-  todos : todo[],
-  removeTodo : (idx:number) => void
-  markTodo: (idx:number) => void,
-}
-
-
-
-export function Assignments({todos, removeTodo, markTodo} : props) {
-
+  const {todos} = useStore();
   const completed = todos.filter(x => x.status).length;
 
   return (
@@ -35,7 +24,7 @@ export function Assignments({todos, removeTodo, markTodo} : props) {
 
       <div className={styles.list}>
 
-        {todos.map((todo, idx) =>  <Assignment key={idx} idx={idx} {...todo} removeTodo ={removeTodo} markTodo={markTodo}/> )}
+        {todos.map((todo, idx) =>  <Assignment key={idx} idx={idx} {...todo}/> )}
        
       </div>
     </section>

@@ -6,15 +6,14 @@ import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 
 import { format } from 'date-fns';
+import { useStore } from "../../appStore";
 
 
-interface props {
-  addTodo: (title:string, dueDate?: Date) => void
-}
 
 
-export function Header({addTodo} : props) {
+export function Header() {
 
+  const {addTodo} = useStore();
   const [dueDate, setDueDate] = useState<Date>();
   const [dateOpen, setDateOpen] = useState(false);
   const [title, setTitle] = useState("");
@@ -30,7 +29,7 @@ export function Header({addTodo} : props) {
 
   const handleClick = () => {
     setTitle("");
-    addTodo(title,dueDate);
+    if(title && dueDate) addTodo(title,dueDate);
     setDueDate(undefined);
     
   }
